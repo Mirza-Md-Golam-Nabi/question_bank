@@ -2,7 +2,15 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\Auth\RegisteredUserController;
+use App\Http\Controllers\Api\Auth\AuthenticatedSessionController;
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:api');
+Route::post('student/register', [RegisteredUserController::class, 'store']);
+Route::post('student/login', [AuthenticatedSessionController::class, 'store']);
+
+Route::post('admin/register', [RegisteredUserController::class, 'store']);
+Route::post('admin/login', [AuthenticatedSessionController::class, 'store']);
+
+Route::middleware('auth:api')->group(function () {
+    Route::get('logout', [AuthenticatedSessionController::class, 'destroy']);
+});
