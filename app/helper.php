@@ -3,6 +3,7 @@
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Contracts\Validation\Validator;
 
 if (!function_exists('authUser')) {
     function authUser(): ?User
@@ -23,6 +24,18 @@ if (!function_exists('formatResponse')) {
             'code' => $code,
             'msg' => $msg,
             'data' => $data,
+        ]);
+    }
+}
+
+if (!function_exists('failedValidationForApi')) {
+    function failedValidationForApi(Validator $validator): JsonResponse
+    {
+        return response()->json([
+            'error' => 1,
+            'code' => 422,
+            'msg' => $validator->errors()->first(),
+            'data' => null,
         ]);
     }
 }
