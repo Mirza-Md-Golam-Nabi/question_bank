@@ -22,40 +22,65 @@ class MakeServiceCommand extends Command
     protected $description = 'Create a new Service Class';
 
     /**
+     * The type of class being generated.
+     *
+     * @var string
+     */
+    protected $type = 'Service';
+
+    /**
      * Execute the console command.
      */
     public function handle()
     {
         $name = $this->argument('name');
-        $serviceName = ucfirst($name);
-        $directory = app_path("Services");
-        $path = "{$directory}/{$serviceName}Service.php";
+
+        // Split the name into parts if it contains slashes
+        $parts = array_map('ucfirst', explode('/', $name));
+        $className = array_pop($parts);
+
+        // Remove "Service" suffix if already present
+        $className = preg_replace('/Service$/i', '', $className);
+
+        $subDirectory = implode('/', $parts);
+
+        $baseDirectory = app_path("Services");
+        $fullDirectory = $subDirectory ? "{$baseDirectory}/{$subDirectory}" : $baseDirectory;
+        $path = "{$fullDirectory}/{$className}Service.php";
 
         // Ensure directory exists
-        File::ensureDirectoryExists($directory);
+        File::ensureDirectoryExists($fullDirectory);
 
         if (File::exists($path)) {
-            $this->error('Service Class already exists!');
+            $this->error($this->type . ' already exists!');
             return;
         }
 
-        $template = <<<EOT
-<?php
+        $namespace = 'App\Services';
+        if (!empty($subDirectory)) {
+            $namespace .= '\\' . str_replace('/', '\\', $subDirectory);
+        }
 
-namespace App\Services;
+        // Get the stub file contents
+        $stub = File::get($this->getStub());
 
-class {$serviceName}Service
-{
-    public function __construct()
-    {
-        //
+        // Replace placeholders
+        $stub = str_replace('{{ namespace }}', $namespace, $stub);
+        $stub = str_replace('{{ class }}', $className, $stub);
+
+        File::put($path, $stub);
+        $this->info($this->type . ' created successfully: ' . $path);
     }
 
-    // Add your service methods here
-}
-EOT;
-
-        File::put($path, $template);
-        $this->info("Service created: {$path}");
+    /**
+     * Get the stub file for the generator.
+     *
+     * @return string
+     */
+    protected function getStub()
+    {
+        return file_exists($customPath = base_path('stubs/service.stub'))
+            ? $customPath
+            : __DIR__ . '/stubs/service.stub';
     }
 }
