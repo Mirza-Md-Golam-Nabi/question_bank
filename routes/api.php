@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\AcademicClassController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\Auth\RegisteredUserController;
 use App\Http\Controllers\Api\Auth\AuthenticatedSessionController;
@@ -13,4 +13,6 @@ Route::post('admin/login', [AuthenticatedSessionController::class, 'store']);
 
 Route::middleware('auth:api')->group(function () {
     Route::get('logout', [AuthenticatedSessionController::class, 'destroy']);
+
+    Route::apiResource('classes', AcademicClassController::class);
 });
