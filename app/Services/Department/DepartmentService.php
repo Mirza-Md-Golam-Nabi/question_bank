@@ -13,7 +13,7 @@ class DepartmentService
 
     public function index(): object
     {
-        return Department::orderBy('name', 'asc')
+        return Department::orderBy('en_name', 'asc')
             ->get();
     }
 
