@@ -18,7 +18,7 @@ class UserSeeder extends Seeder
             ],
             [
                 'name' => 'Super Admin',
-                'email' => 'golamnabi411330@gmail.com',
+                'email' => 'super_admin@gmail.com',
                 'user_type_id' => 1,
                 'password' => 12345678,
             ]
@@ -30,7 +30,7 @@ class UserSeeder extends Seeder
             ],
             [
                 'name' => 'Admin',
-                'email' => 'golamnabi@gmail.com',
+                'email' => 'admin@gmail.com',
                 'user_type_id' => 2,
                 'password' => 12345678,
             ]
@@ -42,7 +42,7 @@ class UserSeeder extends Seeder
             ],
             [
                 'name' => 'Student',
-                'email' => 'golamnabi@gmail.com',
+                'email' => 'student@gmail.com',
                 'user_type_id' => 3,
                 'password' => 12345678,
             ]
