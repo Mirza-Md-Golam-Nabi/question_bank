@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('departments', function (Blueprint $table) {
             $table->tinyIncrements('id');
-            $table->string('name');
+            $table->string('en_name');
+            $table->string('bn_name');
             $table->timestamps();
             $table->softDeletes();
         });

@@ -13,13 +13,16 @@ class DepartmentSeeder extends Seeder
     public function run(): void
     {
         $departments = [
-            'Science',
-            'Commerce',
-            'Arts',
+            ['en_name' => 'Science', 'bn_name' => 'বিজ্ঞান'],
+            ['en_name' => 'Commerce', 'bn_name' => 'বাণিজ্য'],
+            ['en_name' => 'Arts', 'bn_name' => 'মানবিক'],
         ];
 
         foreach ($departments as $department) {
-            Department::firstOrCreate(['name' => $department]);
+            Department::firstOrCreate(
+                ['en_name' => $department['en_name']],
+                ['bn_name' => $department['bn_name']]
+            );
         }
     }
 }
