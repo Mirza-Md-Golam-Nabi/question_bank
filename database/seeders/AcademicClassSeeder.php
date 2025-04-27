@@ -13,12 +13,21 @@ class AcademicClassSeeder extends Seeder
     public function run(): void
     {
         $classes = [
-            'Class 09-10',
-            'Class 11-12',
+            'ssc' => [
+                'en_name' => 'Class 09-10',
+                'bn_name' => 'ক্লাস ০৯-১০',
+            ],
+            'hsc' => [
+                'en_name' => 'Class 11-12',
+                'bn_name' => 'ক্লাস ১১-১২',
+            ],
         ];
 
         foreach ($classes as $class) {
-            AcademicClass::firstOrCreate(['name' => $class]);
+            AcademicClass::firstOrCreate(
+                ['en_name' => $class['en_name']],
+                ['bn_name' => $class['bn_name']]
+            );
         }
     }
 }
