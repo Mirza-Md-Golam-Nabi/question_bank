@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Database\Seeders\UserSeeder;
+use Database\Seeders\TopicSeeder;
 use Database\Seeders\ChapterSeeder;
 use Database\Seeders\SubjectSeeder;
 use Database\Seeders\UserTypeSeeder;
@@ -23,7 +24,8 @@ class DatabaseSeeder extends Seeder
             AcademicClassSeeder::class,
             DepartmentSeeder::class,
             SubjectSeeder::class,
-            ChapterSeeder::class
+            ChapterSeeder::class,
+            TopicSeeder::class,
         ]);
     }
 }

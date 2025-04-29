@@ -66,13 +66,13 @@ class ChapterSeeder extends Seeder
             ],
             'Chemistry' => [
                 [
-                    'en_name' => 'Safe Use of Laboratory',
-                    'bn_name' => 'ল্যাবরেটরির নিরাপদ ব্যবহার',
+                    'en_name' => 'Qualitative Chemistry',
+                    'bn_name' => 'গুণগত রসায়ন',
                     'chapter_order' => 1,
                 ],
                 [
-                    'en_name' => 'Qualitative Chemistry',
-                    'bn_name' => 'গুণগত রসায়ন',
+                    'en_name' => 'Periodic Properties of Elements and Chemical Bond',
+                    'bn_name' => 'মৌলের পর্যায়বৃত্ত ধর্ম ও রাসায়নিক বন্ধন',
                     'chapter_order' => 2,
                 ],
             ],
