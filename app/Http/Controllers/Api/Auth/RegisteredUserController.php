@@ -21,17 +21,26 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'phone' => ['required', new PhoneNumber, 'unique:'.User::class],
+            'phone' => ['required', new PhoneNumber, 'unique:' . User::class],
             'email' => ['nullable', 'string', 'lowercase', 'email', 'max:255'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
+        $patternToUserType = [
+            'api/admin/*'      => 2,
+            'api/student/*'    => 3,
+            'api/data-entry/*' => 4,
+        ];
+
         $user_type_id = 0;
-        if ($request->is('api/admin/*')) {
-            $user_type_id = 2;
-        } elseif ($request->is('api/student/*')) {
-            $user_type_id = 3;
+
+        foreach ($patternToUserType as $pattern => $typeId) {
+            if ($request->is($pattern)) {
+                $user_type_id = $typeId;
+                break;
+            }
         }
+
 
         $user = User::create([
             'name' => $request->name,

@@ -21,20 +21,22 @@ class AuthenticatedSessionController extends Controller
         $credentials = $request->only('phone', 'password');
 
         $auth = null;
-        if ($request->is('api/admin/*')) {
-            $credentials['user_type_id'] = 2;
 
-            $auth = Auth::attempt($credentials);
+        $routesWithUserTypes = [
+            'api/admin/*'      => [2, 1], // Try type 2 first, then 1
+            'api/student/*'    => [3],
+            'api/data-entry/*' => [4],
+        ];
 
-            if (!$auth) {
-                $credentials['user_type_id'] = 1;
-
-                $auth = Auth::attempt($credentials);
+        foreach ($routesWithUserTypes as $pattern => $userTypes) {
+            if ($request->is($pattern)) {
+                foreach ($userTypes as $type) {
+                    $credentials['user_type_id'] = $type;
+                    if ($auth = Auth::attempt($credentials)) {
+                        break 2; // Break both loops on success
+                    }
+                }
             }
-        } elseif ($request->is('api/student/*')) {
-            $credentials['user_type_id'] = 3;
-
-            $auth = Auth::attempt($credentials);
         }
 
         if ($auth) {
