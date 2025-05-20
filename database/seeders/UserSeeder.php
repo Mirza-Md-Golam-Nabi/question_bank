@@ -38,12 +38,24 @@ class UserSeeder extends Seeder
 
         User::firstOrCreate(
             [
-                'phone' => '01825712674',
+                'phone' => '01825712672',
             ],
             [
                 'name' => 'Student',
                 'email' => 'student@gmail.com',
                 'user_type_id' => 3,
+                'password' => 12345678,
+            ]
+        );
+
+        User::firstOrCreate(
+            [
+                'phone' => '01825712673',
+            ],
+            [
+                'name' => 'Data Entry',
+                'email' => 'data_entry@gmail.com',
+                'user_type_id' => 4,
                 'password' => 12345678,
             ]
         );

@@ -7,6 +7,7 @@ use Database\Seeders\UserSeeder;
 use Database\Seeders\TopicSeeder;
 use Database\Seeders\ChapterSeeder;
 use Database\Seeders\SubjectSeeder;
+use Database\Seeders\QuestionSeeder;
 use Database\Seeders\UserTypeSeeder;
 use Database\Seeders\DepartmentSeeder;
 use Database\Seeders\AcademicClassSeeder;
@@ -26,6 +27,7 @@ class DatabaseSeeder extends Seeder
             SubjectSeeder::class,
             ChapterSeeder::class,
             TopicSeeder::class,
+            QuestionSeeder::class,
         ]);
     }
 }

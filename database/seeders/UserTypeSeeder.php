@@ -17,6 +17,7 @@ class UserTypeSeeder extends Seeder
             'Super Admin',
             'Admin',
             'Student',
+            'Data Entry',
         ];
 
         foreach ($types as $type) {
