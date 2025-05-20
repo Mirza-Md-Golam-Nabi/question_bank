@@ -2,10 +2,9 @@
 
 namespace App\Http\Requests\Department;
 
-use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Contracts\Validation\Validator;
+use App\Http\Requests\BaseRequest;
 
-class StoreDepartmentRequest extends FormRequest
+class StoreDepartmentRequest extends BaseRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,20 +24,5 @@ class StoreDepartmentRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'max:255'],
         ];
-    }
-
-    public function failedValidation(Validator $validator)
-    {
-        $response = null;
-
-        if ($this->is('api/*')) {
-            $response = failedValidationForApi($validator);
-        }
-
-        $exception = $validator->getException();
-
-        throw (new $exception($validator, $response))
-            ->errorBag($this->errorBag)
-            ->redirectTo($this->getRedirectUrl());
     }
 }

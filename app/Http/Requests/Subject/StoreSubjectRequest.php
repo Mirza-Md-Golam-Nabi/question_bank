@@ -3,10 +3,9 @@
 namespace App\Http\Requests\Subject;
 
 use Illuminate\Validation\Rule;
-use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Contracts\Validation\Validator;
+use App\Http\Requests\BaseRequest;
 
-class StoreSubjectRequest extends FormRequest
+class StoreSubjectRequest extends BaseRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -43,20 +42,5 @@ class StoreSubjectRequest extends FormRequest
                     ->ignore($subject_id)
             ]
         ];
-    }
-
-    public function failedValidation(Validator $validator)
-    {
-        $response = null;
-
-        if ($this->is('api/*')) {
-            $response = failedValidationForApi($validator);
-        }
-
-        $exception = $validator->getException();
-
-        throw (new $exception($validator, $response))
-            ->errorBag($this->errorBag)
-            ->redirectTo($this->getRedirectUrl());
     }
 }

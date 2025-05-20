@@ -3,10 +3,9 @@
 namespace App\Http\Requests\Chapter;
 
 use Illuminate\Validation\Rule;
-use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Contracts\Validation\Validator;
+use App\Http\Requests\BaseRequest;
 
-class StoreChapterRequest extends FormRequest
+class StoreChapterRequest extends BaseRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -66,20 +65,5 @@ class StoreChapterRequest extends FormRequest
         return [
             'subject_id.unique' => 'Please check subject id and chapter order',
         ];
-    }
-
-    public function failedValidation(Validator $validator)
-    {
-        $response = null;
-
-        if ($this->is('api/*')) {
-            $response = failedValidationForApi($validator);
-        }
-
-        $exception = $validator->getException();
-
-        throw (new $exception($validator, $response))
-            ->errorBag($this->errorBag)
-            ->redirectTo($this->getRedirectUrl());
     }
 }
