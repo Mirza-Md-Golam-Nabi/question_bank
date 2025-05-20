@@ -2,9 +2,9 @@
 
 namespace {{ namespace }};
 
-use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Requests\BaseRequest;
 
-class {{ class }} extends FormRequest
+class {{ class }} extends BaseRequest
 {
     /**
      * Determine if the user is authorized to make this request.
