@@ -12,7 +12,7 @@ class Department extends Model
 
     protected $table = 'departments';
 
-    protected $fillable = ['en_name', 'bn_name'];
+    protected $fillable = ['name'];
 
     protected $hidden = ['created_at', 'updated_at'];
 }
