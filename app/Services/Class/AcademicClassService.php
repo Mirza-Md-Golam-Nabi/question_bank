@@ -13,7 +13,7 @@ class AcademicClassService
 
     public function index(): object
     {
-        return AcademicClass::orderBy('en_name', 'asc')
+        return AcademicClass::orderBy('name', 'asc')
             ->get();
     }
 

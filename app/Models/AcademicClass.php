@@ -12,7 +12,7 @@ class AcademicClass extends Model
 
     protected $table = 'academic_classes';
 
-    protected $fillable = ['en_name', 'bn_name'];
+    protected $fillable = ['name'];
 
     protected $hidden = ['created_at', 'updated_at'];
 }

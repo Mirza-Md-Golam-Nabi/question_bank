@@ -14,19 +14,16 @@ class AcademicClassSeeder extends Seeder
     {
         $classes = [
             'ssc' => [
-                'en_name' => 'Class 09-10',
-                'bn_name' => 'ক্লাস ০৯-১০',
+                'name' => 'Class 09-10',
             ],
             'hsc' => [
-                'en_name' => 'Class 11-12',
-                'bn_name' => 'ক্লাস ১১-১২',
+                'name' => 'Class 11-12',
             ],
         ];
 
         foreach ($classes as $class) {
             AcademicClass::firstOrCreate(
-                ['en_name' => $class['en_name']],
-                ['bn_name' => $class['bn_name']]
+                ['name' => $class['name']],
             );
         }
     }
