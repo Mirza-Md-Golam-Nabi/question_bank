@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Department;
 
+use Illuminate\Validation\Rule;
 use App\Http\Requests\BaseRequest;
 
 class StoreDepartmentRequest extends BaseRequest
@@ -11,7 +12,7 @@ class StoreDepartmentRequest extends BaseRequest
      */
     public function authorize(): bool
     {
-        return in_array(authUser()->user_type_id, [1,2]);
+        return in_array(authUser()->user_type_id, [1, 2]);
     }
 
     /**
@@ -21,8 +22,16 @@ class StoreDepartmentRequest extends BaseRequest
      */
     public function rules(): array
     {
+        $departmentId = $this->route('department');
+
         return [
-            'name' => ['required', 'string', 'max:255'],
+            'name' => [
+                'required',
+                'string',
+                'max:255',
+                Rule::unique('departments', 'name')
+                    ->ignore($departmentId),
+            ]
         ];
     }
 }
