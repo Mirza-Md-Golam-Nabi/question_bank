@@ -15,8 +15,7 @@ return new class extends Migration
             $table->smallIncrements('id');
             $table->unsignedTinyInteger('class_id')->index();
             $table->unsignedTinyInteger('department_id')->index();
-            $table->string('en_name');
-            $table->string('bn_name');
+            $table->string('name');
             $table->timestamps();
             $table->softDeletes();
         });

@@ -17,7 +17,7 @@ class Subject extends Model
 
     protected $table = 'subjects';
 
-    protected $fillable = ['class_id', 'department_id', 'en_name', 'bn_name'];
+    protected $fillable = ['class_id', 'department_id', 'name'];
 
     protected $hidden = ['created_at', 'updated_at'];
 

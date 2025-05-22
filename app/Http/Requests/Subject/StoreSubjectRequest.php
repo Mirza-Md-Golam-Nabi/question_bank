@@ -27,18 +27,11 @@ class StoreSubjectRequest extends BaseRequest
         return [
             'class_id' => ['required', 'integer', 'exists:academic_classes,id'],
             'department_id' => ['required', 'integer', 'exists:departments,id'],
-            'en_name' => [
+            'name' => [
                 'required',
                 'string',
                 'max:255',
-                Rule::unique('subjects', 'en_name')
-                    ->ignore($subject_id)
-            ],
-            'bn_name' => [
-                'required',
-                'string',
-                'max:255',
-                Rule::unique('subjects', 'bn_name')
+                Rule::unique('subjects', 'name')
                     ->ignore($subject_id)
             ]
         ];

@@ -15,7 +15,7 @@ class SubjectService
     {
         return Subject::orderBy('class_id', 'asc')
             ->orderBy('department_id', 'asc')
-            ->orderBy('en_name', 'asc')
+            ->orderBy('name', 'asc')
             ->get();
     }
 
