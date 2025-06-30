@@ -2,17 +2,15 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\AcademicClassResource\Pages;
-use App\Filament\Resources\AcademicClassResource\RelationManagers;
-use App\Models\AcademicClass;
 use Filament\Forms;
+use Filament\Tables;
 use Filament\Forms\Form;
+use Filament\Tables\Table;
+use App\Models\AcademicClass;
 use Filament\Resources\Resource;
 use Filament\Support\Enums\MaxWidth;
-use Filament\Tables;
-use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Database\Eloquent\Model;
+use App\Filament\Resources\AcademicClassResource\Pages;
 
 class AcademicClassResource extends Resource
 {
@@ -26,15 +24,22 @@ class AcademicClassResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('name')
                     ->required()
-                    ->maxLength(255),
+                    ->maxLength(255)
+                    ->columnSpan('full'),
             ]);
     }
 
     public static function table(Table $table): Table
     {
         return $table
+            ->recordUrl(function (Model $record) {
+                return route('filament.admin.resources.departments.index', [
+                    'class_id' => $record->id
+                ]);
+            })
             ->columns([
                 Tables\Columns\TextColumn::make('name')
+                    ->label('Academic Class')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()

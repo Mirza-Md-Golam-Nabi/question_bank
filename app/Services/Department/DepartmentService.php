@@ -11,9 +11,10 @@ class DepartmentService
         //
     }
 
-    public function index(): object
+    public function index(int $class_id): object
     {
-        return Department::orderBy('name', 'asc')
+        return Department::where('academic_class_id', $class_id)
+            ->orderBy('name', 'asc')
             ->get();
     }
 

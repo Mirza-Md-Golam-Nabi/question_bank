@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('departments', function (Blueprint $table) {
             $table->tinyIncrements('id');
+            $table->unsignedTinyInteger('academic_class_id');
             $table->string('name');
             $table->timestamps();
             $table->softDeletes();

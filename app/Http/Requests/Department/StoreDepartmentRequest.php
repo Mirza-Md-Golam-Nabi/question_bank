@@ -23,13 +23,19 @@ class StoreDepartmentRequest extends BaseRequest
     public function rules(): array
     {
         $departmentId = $this->route('department');
+        $class_id = $this->input('academic_class_id');
 
         return [
+            'academic_class_id' => [
+                'required',
+                'exists:academic_classes,id'
+            ],
             'name' => [
                 'required',
                 'string',
                 'max:255',
                 Rule::unique('departments', 'name')
+                    ->where(fn($query) => $query->where('academic_class_id', $class_id))
                     ->ignore($departmentId),
             ]
         ];
