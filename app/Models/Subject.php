@@ -17,7 +17,7 @@ class Subject extends Model
 
     protected $table = 'subjects';
 
-    protected $fillable = ['class_id', 'department_id', 'name'];
+    protected $fillable = ['department_id', 'name'];
 
     protected $hidden = ['created_at', 'updated_at'];
 
@@ -31,7 +31,7 @@ class Subject extends Model
         return $this->belongsTo(Department::class, 'department_id', 'id');
     }
 
-    public function chapter(): HasMany
+    public function chapters(): HasMany
     {
         return $this->hasMany(Chapter::class, 'chapter_id', 'id');
     }

@@ -19,38 +19,28 @@ class SubjectResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-document-text';
 
-
-
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('class_id')
-                    ->label('Class')
-                    ->relationship('academic_class', 'name')
-                    ->required(),
-                Forms\Components\Select::make('department_id')
-                    ->relationship('department', 'name')
-                    ->required(),
+                Forms\Components\Hidden::make('department_id'),
                 Forms\Components\TextInput::make('name')
                     ->required()
-                    ->maxLength(255),
+                    ->maxLength(255)
+                    ->columnSpan('full'),
             ]);
     }
 
     public static function table(Table $table): Table
     {
         return $table
+            ->defaultSort('name', 'asc')
             ->columns([
-                Tables\Columns\TextColumn::make('academic_class.name')
-                ->label('Class')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('department.name')
-                    ->numeric()
-                    ->sortable(),
+                Tables\Columns\TextColumn::make('index')
+                    ->rowIndex()
+                    ->label('S.N'),
                 Tables\Columns\TextColumn::make('name')
-                ->label('Subject')
+                    ->label('Subject')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()

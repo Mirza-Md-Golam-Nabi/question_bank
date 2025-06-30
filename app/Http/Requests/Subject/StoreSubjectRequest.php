@@ -23,15 +23,16 @@ class StoreSubjectRequest extends BaseRequest
     public function rules(): array
     {
         $subject_id = $this->subject?->id ?? null;
+        $department_id = $this->input('department_id');
 
         return [
-            'class_id' => ['required', 'integer', 'exists:academic_classes,id'],
             'department_id' => ['required', 'integer', 'exists:departments,id'],
             'name' => [
                 'required',
                 'string',
                 'max:255',
                 Rule::unique('subjects', 'name')
+                    ->where(fn($query) => $query->where('department_id', $department_id))
                     ->ignore($subject_id)
             ]
         ];

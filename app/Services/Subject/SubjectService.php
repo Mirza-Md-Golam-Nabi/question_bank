@@ -11,10 +11,9 @@ class SubjectService
         //
     }
 
-    public function index(): object
+    public function index(int $department_id): object
     {
-        return Subject::orderBy('class_id', 'asc')
-            ->orderBy('department_id', 'asc')
+        return Subject::where('department_id', $department_id)
             ->orderBy('name', 'asc')
             ->get();
     }

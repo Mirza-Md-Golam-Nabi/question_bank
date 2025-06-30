@@ -34,6 +34,11 @@ class DepartmentResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->recordUrl(function (Model $record) {
+                return route('filament.admin.resources.subjects.index', [
+                    'department_id' => $record->id
+                ]);
+            })
             ->columns([
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
