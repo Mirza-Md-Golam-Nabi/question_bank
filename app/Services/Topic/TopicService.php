@@ -11,9 +11,9 @@ class TopicService
         //
     }
 
-    public function index(): object
+    public function index(int $chapter_id): object
     {
-        return Topic::orderBy('chapter_id', 'asc')
+        return Topic::where('chapter_id', $chapter_id)
             ->orderBy('topic_order', 'asc')
             ->get();
     }

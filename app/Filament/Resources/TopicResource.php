@@ -4,54 +4,56 @@ namespace App\Filament\Resources;
 
 use Filament\Forms;
 use Filament\Tables;
-use App\Models\Chapter;
+use App\Models\Topic;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Filament\Resources\Resource;
 use Illuminate\Database\Eloquent\Model;
-use App\Filament\Resources\ChapterResource\Pages;
+use Illuminate\Database\Eloquent\Builder;
+use App\Filament\Resources\TopicResource\Pages;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\TopicResource\RelationManagers;
 
-class ChapterResource extends Resource
+class TopicResource extends Resource
 {
-    protected static ?string $model = Chapter::class;
+    protected static ?string $model = Topic::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-group';
+    protected static ?string $navigationIcon = 'heroicon-o-list-bullet';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\Hidden::make('subject_id'),
+                Forms\Components\Hidden::make('chapter_id'),
 
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255),
 
-                Forms\Components\TextInput::make('chapter_order')
+                Forms\Components\TextInput::make('topic_order')
                     ->required()
-                    ->numeric()
-                    ->maxValue(250),
+                    ->numeric(),
             ]);
     }
 
     public static function table(Table $table): Table
     {
         return $table
-            ->recordUrl(function (Model $record) {
-                return route('filament.admin.resources.topics.index', [
-                    'chapter_id' => $record->id
-                ]);
-            })
             ->columns([
-                Tables\Columns\TextColumn::make('subject.name'),
+                Tables\Columns\TextColumn::make('chapter.name')
+                    ->numeric()
+                    ->sortable(),
 
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('chapter_order')
+
+                Tables\Columns\TextColumn::make('topic_order')
                     ->numeric()
                     ->sortable(),
             ])
-            ->defaultSort('chapter_order', 'asc')
+            ->filters([
+                //
+            ])
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
@@ -66,7 +68,7 @@ class ChapterResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ManageChapters::route('/'),
+            'index' => Pages\ManageTopics::route('/'),
         ];
     }
 }

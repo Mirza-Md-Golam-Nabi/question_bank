@@ -33,15 +33,7 @@ class StoreTopicRequest extends BaseRequest
                     ->where('topic_order', request('topic_order'))
                     ->ignore($topic_id)
             ],
-            'en_name' => [
-                'required',
-                'string',
-                'max:255',
-                Rule::unique('topics')
-                    ->where('chapter_id', request('chapter_id'))
-                    ->ignore($topic_id)
-            ],
-            'bn_name' => [
+            'name' => [
                 'required',
                 'string',
                 'max:255',

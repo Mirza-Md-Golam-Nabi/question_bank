@@ -13,7 +13,7 @@ class Topic extends Model
 
     protected $table = 'topics';
 
-    protected $fillable = ['chapter_id', 'en_name', 'bn_name', 'topic_order'];
+    protected $fillable = ['chapter_id', 'name', 'topic_order'];
 
     protected $hidden = ['created_at', 'updated_at'];
 

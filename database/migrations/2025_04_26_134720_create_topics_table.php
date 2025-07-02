@@ -14,8 +14,7 @@ return new class extends Migration
         Schema::create('topics', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedMediumInteger('chapter_id')->index();
-            $table->string('en_name');
-            $table->string('bn_name');
+            $table->string('name');
             $table->unsignedTinyInteger('topic_order');
             $table->timestamps();
             $table->softDeletes();
