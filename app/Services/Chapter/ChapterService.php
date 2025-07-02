@@ -11,9 +11,9 @@ class ChapterService
         //
     }
 
-    public function index(): object
+    public function index(int $subject_id): object
     {
-        return Chapter::orderBy('subject_id', 'asc')
+        return Chapter::where('subject_id', $subject_id)
             ->orderBy('chapter_order', 'asc')
             ->get();
     }

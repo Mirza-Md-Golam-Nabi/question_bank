@@ -80,4 +80,51 @@ trait SeederHelper
             ],
         ];
     }
+
+    protected function getSchoolScienceSubjectList(): array
+    {
+        $school_subjects = $this->getSchoolSubjectList();
+
+        return $school_subjects['Science'];
+    }
+
+    protected function getSchoolScienceChapterList(): array
+    {
+        return [
+            'Physics' => [
+                [
+                    'name' => 'ভৌত জগৎ ও পরিমাপ',
+                    'chapter_order' => 1,
+                ],
+                [
+                    'name' => 'ভেক্টর',
+                    'chapter_order' => 2,
+                ],
+            ],
+            'Chemistry' => [
+                [
+                    'name' => 'গুণগত রসায়ন',
+                    'chapter_order' => 1,
+                ],
+                [
+                    'name' => 'মৌলের পর্যায়বৃত্ত ধর্ম ও রাসায়নিক বন্ধন',
+                    'chapter_order' => 2,
+                ],
+            ],
+            'Biology' => [
+                [
+                    'name' => 'কোষ ও এর গঠন',
+                    'chapter_order' => 1,
+                ],
+                [
+                    'name' => 'কোষ বিভাজন',
+                    'chapter_order' => 2,
+                ],
+                [
+                    'name' => 'কোষ রসায়ন',
+                    'chapter_order' => 3,
+                ],
+            ]
+        ];
+    }
 }

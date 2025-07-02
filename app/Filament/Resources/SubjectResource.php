@@ -2,16 +2,17 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\SubjectResource\Pages;
-use App\Filament\Resources\SubjectResource\RelationManagers;
-use App\Models\Subject;
 use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
 use Filament\Tables;
+use App\Models\Subject;
+use Filament\Forms\Form;
 use Filament\Tables\Table;
+use Filament\Resources\Resource;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
+use App\Filament\Resources\SubjectResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\SubjectResource\RelationManagers;
 
 class SubjectResource extends Resource
 {
@@ -34,6 +35,11 @@ class SubjectResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+        ->recordUrl(function(Model $record){
+            return route('filament.admin.resources.chapters.index', [
+                'subject_id' => $record->id
+            ]);
+        })
             ->defaultSort('name', 'asc')
             ->columns([
                 Tables\Columns\TextColumn::make('index')

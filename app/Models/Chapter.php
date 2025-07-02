@@ -16,7 +16,7 @@ class Chapter extends Model
 
     protected $table = 'chapters';
 
-    protected $fillable = ['subject_id', 'en_name', 'bn_name', 'chapter_order'];
+    protected $fillable = ['subject_id', 'name', 'chapter_order'];
 
     protected $hidden = ['created_at', 'updated_at'];
 

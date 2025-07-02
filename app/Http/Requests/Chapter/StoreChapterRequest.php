@@ -33,15 +33,7 @@ class StoreChapterRequest extends BaseRequest
                     ->where('chapter_order', request('chapter_order'))
                     ->ignore($chapter_id)
             ],
-            'en_name' => [
-                'required',
-                'string',
-                'max:255',
-                Rule::unique('chapters')
-                    ->where('subject_id', request('subject_id'))
-                    ->ignore($chapter_id)
-            ],
-            'bn_name' => [
+            'name' => [
                 'required',
                 'string',
                 'max:255',

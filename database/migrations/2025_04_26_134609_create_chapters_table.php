@@ -14,8 +14,7 @@ return new class extends Migration
         Schema::create('chapters', function (Blueprint $table) {
             $table->mediumIncrements('id');
             $table->unsignedSmallInteger('subject_id')->index();
-            $table->string('en_name');
-            $table->string('bn_name');
+            $table->string('name');
             $table->unsignedSmallInteger('chapter_order');
             $table->timestamps();
             $table->softDeletes();
